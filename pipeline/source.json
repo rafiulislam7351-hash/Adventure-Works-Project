@@ -26,12 +26,14 @@
 						}
 					},
 					"sink": {
-						"type": "ParquetSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "ParquetWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
@@ -52,7 +54,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "source_parquet1",
+						"referenceName": "source_product",
 						"type": "DatasetReference"
 					}
 				]
