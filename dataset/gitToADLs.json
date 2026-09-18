@@ -5,12 +5,20 @@
 			"referenceName": "gitToADF",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"p_getdata": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Products.csv"
+				"relativeUrl": {
+					"value": "@dataset().p_getdata",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

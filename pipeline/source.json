@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "gitToAdls",
+				"name": "DynamicgitToAdls",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
