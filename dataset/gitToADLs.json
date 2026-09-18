@@ -1,0 +1,22 @@
+{
+	"name": "gitToADLs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gitToADF",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Products.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
