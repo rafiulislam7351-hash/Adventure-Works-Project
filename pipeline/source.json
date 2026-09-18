@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('lookParameter').output",
+						"value": "@activity('lookParameter').output.value",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -71,7 +71,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"p_getdata": {
-											"value": "@item()",
+											"value": "@item().p_getdata",
 											"type": "Expression"
 										}
 									}
@@ -83,11 +83,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"p_sink_directory": {
-											"value": "@item()",
+											"value": "@item().p_sink_directory",
 											"type": "Expression"
 										},
 										"p_sink_data": {
-											"value": "@item()",
+											"value": "@item().p_sink_data",
 											"type": "Expression"
 										}
 									}
