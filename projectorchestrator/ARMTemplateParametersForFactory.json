@@ -10,6 +10,9 @@
 		},
 		"ADLStoADF_properties_typeProperties_url": {
 			"value": "https://advwprojectstorage.dfs.core.windows.net/"
+		},
+		"gitToADF_properties_typeProperties_url": {
+			"value": "https://github.com/"
 		}
 	}
 }
