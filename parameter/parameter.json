@@ -1,0 +1,52 @@
+[
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Calendar.csv",
+    "p_sink_directory": "calender",
+    "p_sink_data": "calender.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Customers.csv",
+    "p_sink_directory": "customer",
+    "p_sink_data": "customer.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Product_Categories.csv",
+    "p_sink_directory": "productcategory",
+    "p_sink_data": "product_category.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Product_Subcategories.csv",
+    "p_sink_directory": "productsubcategory",
+    "p_sink_data": "product_subcategory.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Products.csv",
+    "p_sink_directory": "product",
+    "p_sink_data": "product.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Returns.csv",
+    "p_sink_directory": "returns",
+    "p_sink_data": "returns.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Sales_2015.csv",
+    "p_sink_directory": "sales2015",
+    "p_sink_data": "sales2015.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Sales_2016.csv",
+    "p_sink_directory": "sales2016",
+    "p_sink_data": "sales2016.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Sales_2017.csv",
+    "p_sink_directory": "sales2017",
+    "p_sink_data": "sales2017.csv"
+  },
+  {
+    "p_getdata": "rafiulislam7351-hash/Adventure-Works-Project/blob/main/Kaggle_Datasets/AdventureWorks_Territories.csv",
+    "p_sink_directory": "territories",
+    "p_sink_data": "territories.csv"
+  }
+]
