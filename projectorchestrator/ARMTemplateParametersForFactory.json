@@ -13,6 +13,9 @@
 		},
 		"gitToADF_properties_typeProperties_url": {
 			"value": "https://github.com/"
+		},
+		"security_properties_typeProperties_baseUrl": {
+			"value": "https://secretkeysadventure.vault.azure.net/"
 		}
 	}
 }

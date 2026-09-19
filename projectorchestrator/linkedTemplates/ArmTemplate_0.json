@@ -18,6 +18,10 @@
 		"gitToADF_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://github.com/"
+		},
+		"security_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://secretkeysadventure.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -55,6 +59,266 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/security')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('security_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/gitToADLs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "gitToADF",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"p_getdata": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().p_getdata",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/gitToADF')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/parameter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLStoADF",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "parameter.json",
+						"fileSystem": "parameter"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLStoADF')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source_product')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLStoADF",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"p_sink_directory": {
+						"type": "String"
+					},
+					"p_sink_data": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().p_sink_directory",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().p_sink_directory",
+							"type": "Expression"
+						},
+						"fileSystem": "source"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLStoADF')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/source')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dynamicLoop",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "lookParameter",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('lookParameter').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "DynamicgitToAdls",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.01:00:00",
+										"retry": 3,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "gitToADLs",
+											"type": "DatasetReference",
+											"parameters": {
+												"p_getdata": {
+													"value": "@item().p_getdata",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "source_product",
+											"type": "DatasetReference",
+											"parameters": {
+												"p_sink_directory": {
+													"value": "@item().p_sink_directory",
+													"type": "Expression"
+												},
+												"p_sink_data": {
+													"value": "@item().p_sink_data",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"name": "lookParameter",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.01:00:00",
+							"retry": 3,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"dataset": {
+								"referenceName": "parameter",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/parameter')]",
+				"[concat(variables('factoryId'), '/datasets/gitToADLs')]",
+				"[concat(variables('factoryId'), '/datasets/source_product')]"
+			]
 		}
 	]
 }
