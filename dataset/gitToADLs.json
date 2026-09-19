@@ -2,7 +2,7 @@
 	"name": "gitToADLs",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "gitToADF",
+			"referenceName": "GitToADLSgen2",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
