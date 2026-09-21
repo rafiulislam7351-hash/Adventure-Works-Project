@@ -1,16 +1,20 @@
 {
 	"name": "goldlayeradvw-WorkspaceDefaultSqlServer",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
+		"typeProperties": {
+			"connectionString": "Data Source=tcp:goldlayeradvw.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
 		"parameters": {
 			"DBName": {
-				"type": "string"
+				"type": "String"
 			}
 		},
-		"annotations": [],
 		"type": "AzureSqlDW",
-		"typeProperties": {
-			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:goldlayeradvw.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
-		}
-	},
-	"type": "Microsoft.Synapse/workspaces/linkedservices"
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"annotations": []
+	}
 }
