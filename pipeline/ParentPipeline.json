@@ -63,6 +63,39 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Gold",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://alertsystem-bfh5c6gxfxbkhmcq.westus3-01.azurewebsites.net:443/api/Alert/triggers/When_an_HTTP_request_is_received/invoke?api-version=2022-05-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=lvrt-yzZ04xAcG568EjN0GlFScdqL3oZv1gddfJKJE4",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"body": {
+						"pipeline_name": "@{pipeline().Pipeline}",
+						"pipeline_id": "@{pipeline().DataFactory}",
+						"run_id": "@{pipeline().RunId}"
+					}
+				}
 			}
 		],
 		"annotations": [],
