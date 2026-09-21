@@ -1,6 +1,11 @@
 {
 	"name": "goldlayeradvw-WorkspaceDefaultSqlServer",
 	"properties": {
+		"parameters": {
+			"DBName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDW",
 		"typeProperties": {
