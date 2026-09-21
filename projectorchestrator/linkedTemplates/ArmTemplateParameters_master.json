@@ -8,11 +8,23 @@
 		"ADLStoADF_accountKey": {
 			"value": ""
 		},
+		"AzureDatabricks_accessToken": {
+			"value": ""
+		},
+		"goldlayeradvw-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:goldlayeradvw.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
 		"ADLStoADF_properties_typeProperties_url": {
 			"value": "https://advwprojectstorage.dfs.core.windows.net/"
 		},
+		"AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"value": "0918-183820-sxz1mn7l"
+		},
 		"gitToADF_properties_typeProperties_url": {
-			"value": "https://github.com/"
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://advwprojectstorage.dfs.core.windows.net"
 		},
 		"security_properties_typeProperties_baseUrl": {
 			"value": "https://secretkeysadventure.vault.azure.net/"

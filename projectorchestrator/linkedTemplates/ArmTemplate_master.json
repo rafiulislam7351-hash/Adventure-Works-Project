@@ -11,13 +11,30 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ADLStoADF'"
 		},
+		"AzureDatabricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks'"
+		},
+		"goldlayeradvw-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'goldlayeradvw-WorkspaceDefaultSqlServer'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:goldlayeradvw.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
 		"ADLStoADF_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://advwprojectstorage.dfs.core.windows.net/"
 		},
+		"AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0918-183820-sxz1mn7l"
+		},
 		"gitToADF_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/"
+			"defaultValue": "https://raw.githubusercontent.com/"
+		},
+		"goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://advwprojectstorage.dfs.core.windows.net"
 		},
 		"security_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -53,14 +70,26 @@
 					"ADLStoADF_accountKey": {
 						"value": "[parameters('ADLStoADF_accountKey')]"
 					},
+					"AzureDatabricks_accessToken": {
+						"value": "[parameters('AzureDatabricks_accessToken')]"
+					},
+					"goldlayeradvw-WorkspaceDefaultSqlServer_connectionString": {
+						"value": "[parameters('goldlayeradvw-WorkspaceDefaultSqlServer_connectionString')]"
+					},
 					"ADLStoADF_properties_typeProperties_url": {
 						"value": "[parameters('ADLStoADF_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks_properties_typeProperties_existingClusterId')]"
 					},
 					"gitToADF_properties_typeProperties_url": {
 						"value": "[parameters('gitToADF_properties_typeProperties_url')]"
 					},
 					"security_properties_typeProperties_baseUrl": {
 						"value": "[parameters('security_properties_typeProperties_baseUrl')]"
+					},
+					"goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url": {
+						"value": "[parameters('goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url')]"
 					}
 				}
 			},
