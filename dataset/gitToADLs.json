@@ -1,0 +1,31 @@
+{
+	"name": "gitToADLs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gitToADF",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_getdata": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().p_getdata",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

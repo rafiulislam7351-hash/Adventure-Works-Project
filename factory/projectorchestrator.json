@@ -1,0 +1,15 @@
+{
+	"name": "projectorchestrator",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ccc648d8-6bf9-4444-99ee-1a8e59a4b4f6",
+		"tenantId": "37e4118b-2371-46bd-b640-2adf387c272f"
+	}
+}

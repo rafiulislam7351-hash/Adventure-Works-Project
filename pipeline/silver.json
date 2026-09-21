@@ -1,0 +1,30 @@
+{
+	"name": "silver",
+	"properties": {
+		"activities": [
+			{
+				"name": "silver layer",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.01:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/@rafiulislam7351outlook.onmicrosoft.com/Adventure_Works/silver_layer"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-09-19T19:12:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
