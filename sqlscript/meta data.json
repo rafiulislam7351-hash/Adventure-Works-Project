@@ -1,0 +1,17 @@
+{
+	"name": "meta data",
+	"properties": {
+		"content": {
+			"query": "-- Step 1: Create Master Key if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')\nBEGIN\n    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'rafiul735150@#';\nEND;\n\n-- Step 2: Create Database Scoped Credential if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.database_scoped_credentials WHERE name = 'advwrk')\nBEGIN\n    CREATE DATABASE SCOPED CREDENTIAL advwrk\n    WITH IDENTITY = 'Managed Identity';\nEND;\n\n-- Step 3: Create External Data Source if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'SilverData')\nBEGIN\n    CREATE EXTERNAL DATA SOURCE SilverData\n    WITH (\n        LOCATION = 'https://advwprojectstorage.blob.core.windows.net/silver',\n        CREDENTIAL = advwrk\n    );\nEND;\n\n-- Step 1: Create Master Key if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')\nBEGIN\n    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'rafiul735150@#';\nEND;\n\n-- Step 2: Create Database Scoped Credential if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.database_scoped_credentials WHERE name = 'advwrk')\nBEGIN\n    CREATE DATABASE SCOPED CREDENTIAL advwrk\n    WITH IDENTITY = 'Managed Identity';\nEND;\n\n-- Step 3: Create External Data Source if it does not exist\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'GoldData')\nBEGIN\n    CREATE EXTERNAL DATA SOURCE GoldData\n    WITH (\n        LOCATION = 'https://advwprojectstorage.blob.core.windows.net/gold',\n        CREDENTIAL = advwrk\n    );\nEND;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "gold",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
