@@ -85,11 +85,11 @@
 					"gitToADF_properties_typeProperties_url": {
 						"value": "[parameters('gitToADF_properties_typeProperties_url')]"
 					},
-					"security_properties_typeProperties_baseUrl": {
-						"value": "[parameters('security_properties_typeProperties_baseUrl')]"
-					},
 					"goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url": {
 						"value": "[parameters('goldlayeradvw-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					},
+					"security_properties_typeProperties_baseUrl": {
+						"value": "[parameters('security_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
