@@ -643,7 +643,8 @@
 							{
 								"activity": "silver",
 								"dependencyConditions": [
-									"Failed"
+									"Failed",
+									"Succeeded"
 								]
 							},
 							{
