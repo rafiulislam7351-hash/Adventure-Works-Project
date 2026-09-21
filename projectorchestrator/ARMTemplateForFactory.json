@@ -234,7 +234,7 @@
 						}
 					},
 					{
-						"name": "Web1",
+						"name": "Alert",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
@@ -246,8 +246,7 @@
 							{
 								"activity": "silver",
 								"dependencyConditions": [
-									"Failed",
-									"Succeeded"
+									"Failed"
 								]
 							},
 							{
